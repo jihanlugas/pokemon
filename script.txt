@@ -1,0 +1,14 @@
+// linux
+// generate ./swg and run go server
+./swag init -g ./cmd/server/main.go -o ./swg && go run ./cmd/server/main.go
+
+// genna
+./genna model-named -o $HOME/development/go/gopokemon -f -k -g 9 -p model -c postgres://jihanlugas:12345678@localhost:5432/gopokemon
+
+
+// windows
+// generate ./swg and run go server
+.\swag.exe init -g .\cmd\server\main.go -o .\swg\ && go run .\cmd\server
+
+// genna
+.\genna.exe model-named -o D:\go\src\gopokemon -f -k -g 9 -p model -c postgres://jihanlugas:12345678@localhost:5432/gopokemon?sslmode=disable

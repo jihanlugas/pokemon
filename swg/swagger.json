@@ -1,0 +1,838 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "gopokemon service API",
+        "title": "gopokemon service API",
+        "contact": {},
+        "version": "1.0"
+    },
+    "basePath": "/",
+    "paths": {
+        "/pokemon": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Pokemon"
+                ],
+                "summary": "page pokemon",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "name": "offset",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "json with success = true",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/response.SuccessResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "payload": {
+                                            "$ref": "#/definitions/controller.pageRes"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "json with error = true",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/pokemon/catch": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Pokemon"
+                ],
+                "summary": "catch pokemon with success probability 50%",
+                "parameters": [
+                    {
+                        "description": "Req Param",
+                        "name": "req",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/controller.catchReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "json with success = true",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/response.SuccessResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "payload": {
+                                            "$ref": "#/definitions/model.UserpokemonRes"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "json with error = true",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/pokemon/{pokemon}": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Pokemon"
+                ],
+                "summary": "get pokemon",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "name": "offset",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "json with success = true",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/response.SuccessResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "payload": {
+                                            "$ref": "#/definitions/structs.Pokemon"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "json with error = true",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/sign-in": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Sign in a user",
+                "parameters": [
+                    {
+                        "description": "json req body",
+                        "name": "req",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/controller.signinReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "json with success = true",
+                        "schema": {
+                            "$ref": "#/definitions/response.SuccessResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "json with error = true",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/sign-out": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Sign out a user",
+                "responses": {
+                    "200": {
+                        "description": "json with success = true",
+                        "schema": {
+                            "$ref": "#/definitions/response.SuccessResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "json with error = true",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/sign-up": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Sign up a user",
+                "parameters": [
+                    {
+                        "description": "json req body",
+                        "name": "req",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/controller.signupReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "json with success = true",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/response.SuccessResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "payload": {
+                                            "$ref": "#/definitions/model.UserRes"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "json with error = true",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/user-pokemon/my-pokemon": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Pokemon"
+                ],
+                "summary": "page user pokemon",
+                "responses": {
+                    "200": {
+                        "description": "json with success = true",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/response.SuccessResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "payload": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/model.UserpokemonRes"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "json with error = true",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User Pokemon"
+                ],
+                "summary": "update user pokemon",
+                "parameters": [
+                    {
+                        "description": "Req Param",
+                        "name": "req",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/controller.updateUserpokemonReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "json with success = true",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/response.SuccessResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "payload": {
+                                            "$ref": "#/definitions/model.UserpokemonRes"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "json with error = true",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/me": {
+            "get": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "To do get current login user",
+                "responses": {
+                    "200": {
+                        "description": "json with success = true",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/response.SuccessResponse"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "payload": {
+                                            "$ref": "#/definitions/controller.meRes"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "json with error = true",
+                        "schema": {
+                            "$ref": "#/definitions/response.ErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "controller.catchReq": {
+            "type": "object",
+            "required": [
+                "pokemon"
+            ],
+            "properties": {
+                "pokemon": {
+                    "type": "string"
+                }
+            }
+        },
+        "controller.meRes": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "fullname": {
+                    "type": "string"
+                },
+                "userId": {
+                    "type": "integer"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "controller.pageRes": {
+            "type": "object",
+            "properties": {
+                "count": {
+                    "type": "integer"
+                },
+                "next": {
+                    "type": "string"
+                },
+                "previous": {
+                    "type": "object"
+                },
+                "results": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/controller.result"
+                    }
+                }
+            }
+        },
+        "controller.result": {
+            "type": "object",
+            "properties": {
+                "image": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            }
+        },
+        "controller.signinReq": {
+            "type": "object",
+            "required": [
+                "passwd",
+                "username"
+            ],
+            "properties": {
+                "passwd": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "controller.signupReq": {
+            "type": "object",
+            "required": [
+                "email",
+                "fullname",
+                "noHp",
+                "passwd",
+                "username"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "fullname": {
+                    "type": "string"
+                },
+                "noHp": {
+                    "type": "string"
+                },
+                "passwd": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "controller.updateUserpokemonReq": {
+            "type": "object",
+            "required": [
+                "nickname",
+                "userpokemonId"
+            ],
+            "properties": {
+                "nickname": {
+                    "type": "string"
+                },
+                "userpokemonId": {
+                    "type": "integer"
+                }
+            }
+        },
+        "model.UserRes": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "fullname": {
+                    "type": "string"
+                },
+                "isActive": {
+                    "type": "boolean"
+                },
+                "noHp": {
+                    "type": "string"
+                },
+                "userId": {
+                    "type": "integer"
+                }
+            }
+        },
+        "model.UserpokemonRes": {
+            "type": "object",
+            "properties": {
+                "nickname": {
+                    "type": "string"
+                },
+                "pokemon": {
+                    "type": "string"
+                },
+                "userId": {
+                    "type": "integer"
+                },
+                "userpokemonId": {
+                    "type": "integer"
+                }
+            }
+        },
+        "response.ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "boolean"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "payload": {
+                    "type": "object"
+                }
+            }
+        },
+        "response.SuccessResponse": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "payload": {
+                    "type": "object"
+                },
+                "success": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "structs.Pokemon": {
+            "type": "object",
+            "properties": {
+                "abilities": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "ability": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "url": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "is_hidden": {
+                                "type": "boolean"
+                            },
+                            "slot": {
+                                "type": "integer"
+                            }
+                        }
+                    }
+                },
+                "base_experience": {
+                    "type": "integer"
+                },
+                "forms": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string"
+                            },
+                            "url": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "game_indices": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "game_index": {
+                                "type": "integer"
+                            },
+                            "version": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "url": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "height": {
+                    "type": "integer"
+                },
+                "held_items": {
+                    "type": "array",
+                    "items": {
+                        "type": "object"
+                    }
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "is_default": {
+                    "type": "boolean"
+                },
+                "location_area_encounters": {
+                    "type": "string"
+                },
+                "moves": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "move": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "url": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "version_group_details": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "level_learned_at": {
+                                            "type": "integer"
+                                        },
+                                        "move_learn_method": {
+                                            "type": "object",
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "url": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "version_group": {
+                                            "type": "object",
+                                            "properties": {
+                                                "name": {
+                                                    "type": "string"
+                                                },
+                                                "url": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "name": {
+                    "type": "string"
+                },
+                "order": {
+                    "type": "integer"
+                },
+                "species": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string"
+                        },
+                        "url": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "sprites": {
+                    "type": "object",
+                    "properties": {
+                        "back_default": {
+                            "type": "string"
+                        },
+                        "back_female": {
+                            "type": "object"
+                        },
+                        "back_shiny": {
+                            "type": "string"
+                        },
+                        "back_shiny_female": {
+                            "type": "object"
+                        },
+                        "front_default": {
+                            "type": "string"
+                        },
+                        "front_female": {
+                            "type": "object"
+                        },
+                        "front_shiny": {
+                            "type": "string"
+                        },
+                        "front_shiny_female": {
+                            "type": "object"
+                        }
+                    }
+                },
+                "stats": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "base_stat": {
+                                "type": "integer"
+                            },
+                            "effort": {
+                                "type": "integer"
+                            },
+                            "stat": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "url": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "types": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "slot": {
+                                "type": "integer"
+                            },
+                            "type": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "url": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "weight": {
+                    "type": "integer"
+                }
+            }
+        }
+    }
+}

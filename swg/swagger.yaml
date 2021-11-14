@@ -1,0 +1,521 @@
+basePath: /
+definitions:
+  controller.catchReq:
+    properties:
+      pokemon:
+        type: string
+    required:
+    - pokemon
+    type: object
+  controller.meRes:
+    properties:
+      email:
+        type: string
+      fullname:
+        type: string
+      userId:
+        type: integer
+      username:
+        type: string
+    type: object
+  controller.pageRes:
+    properties:
+      count:
+        type: integer
+      next:
+        type: string
+      previous:
+        type: object
+      results:
+        items:
+          $ref: '#/definitions/controller.result'
+        type: array
+    type: object
+  controller.result:
+    properties:
+      image:
+        type: string
+      name:
+        type: string
+      url:
+        type: string
+    type: object
+  controller.signinReq:
+    properties:
+      passwd:
+        type: string
+      username:
+        type: string
+    required:
+    - passwd
+    - username
+    type: object
+  controller.signupReq:
+    properties:
+      email:
+        type: string
+      fullname:
+        type: string
+      noHp:
+        type: string
+      passwd:
+        type: string
+      username:
+        type: string
+    required:
+    - email
+    - fullname
+    - noHp
+    - passwd
+    - username
+    type: object
+  controller.updateUserpokemonReq:
+    properties:
+      nickname:
+        type: string
+      userpokemonId:
+        type: integer
+    required:
+    - nickname
+    - userpokemonId
+    type: object
+  model.UserRes:
+    properties:
+      email:
+        type: string
+      fullname:
+        type: string
+      isActive:
+        type: boolean
+      noHp:
+        type: string
+      userId:
+        type: integer
+    type: object
+  model.UserpokemonRes:
+    properties:
+      nickname:
+        type: string
+      pokemon:
+        type: string
+      userId:
+        type: integer
+      userpokemonId:
+        type: integer
+    type: object
+  response.ErrorResponse:
+    properties:
+      error:
+        type: boolean
+      message:
+        type: string
+      payload:
+        type: object
+    type: object
+  response.SuccessResponse:
+    properties:
+      message:
+        type: string
+      payload:
+        type: object
+      success:
+        type: boolean
+    type: object
+  structs.Pokemon:
+    properties:
+      abilities:
+        items:
+          properties:
+            ability:
+              properties:
+                name:
+                  type: string
+                url:
+                  type: string
+              type: object
+            is_hidden:
+              type: boolean
+            slot:
+              type: integer
+          type: object
+        type: array
+      base_experience:
+        type: integer
+      forms:
+        items:
+          properties:
+            name:
+              type: string
+            url:
+              type: string
+          type: object
+        type: array
+      game_indices:
+        items:
+          properties:
+            game_index:
+              type: integer
+            version:
+              properties:
+                name:
+                  type: string
+                url:
+                  type: string
+              type: object
+          type: object
+        type: array
+      height:
+        type: integer
+      held_items:
+        items:
+          type: object
+        type: array
+      id:
+        type: integer
+      is_default:
+        type: boolean
+      location_area_encounters:
+        type: string
+      moves:
+        items:
+          properties:
+            move:
+              properties:
+                name:
+                  type: string
+                url:
+                  type: string
+              type: object
+            version_group_details:
+              items:
+                properties:
+                  level_learned_at:
+                    type: integer
+                  move_learn_method:
+                    properties:
+                      name:
+                        type: string
+                      url:
+                        type: string
+                    type: object
+                  version_group:
+                    properties:
+                      name:
+                        type: string
+                      url:
+                        type: string
+                    type: object
+                type: object
+              type: array
+          type: object
+        type: array
+      name:
+        type: string
+      order:
+        type: integer
+      species:
+        properties:
+          name:
+            type: string
+          url:
+            type: string
+        type: object
+      sprites:
+        properties:
+          back_default:
+            type: string
+          back_female:
+            type: object
+          back_shiny:
+            type: string
+          back_shiny_female:
+            type: object
+          front_default:
+            type: string
+          front_female:
+            type: object
+          front_shiny:
+            type: string
+          front_shiny_female:
+            type: object
+        type: object
+      stats:
+        items:
+          properties:
+            base_stat:
+              type: integer
+            effort:
+              type: integer
+            stat:
+              properties:
+                name:
+                  type: string
+                url:
+                  type: string
+              type: object
+          type: object
+        type: array
+      types:
+        items:
+          properties:
+            slot:
+              type: integer
+            type:
+              properties:
+                name:
+                  type: string
+                url:
+                  type: string
+              type: object
+          type: object
+        type: array
+      weight:
+        type: integer
+    type: object
+info:
+  contact: {}
+  description: gopokemon service API
+  title: gopokemon service API
+  version: "1.0"
+paths:
+  /pokemon:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: offset
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: json with success = true
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.SuccessResponse'
+            - properties:
+                payload:
+                  $ref: '#/definitions/controller.pageRes'
+              type: object
+        "400":
+          description: json with error = true
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+      summary: page pokemon
+      tags:
+      - Pokemon
+  /pokemon/{pokemon}:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - in: query
+        name: limit
+        type: integer
+      - in: query
+        name: offset
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: json with success = true
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.SuccessResponse'
+            - properties:
+                payload:
+                  $ref: '#/definitions/structs.Pokemon'
+              type: object
+        "400":
+          description: json with error = true
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+      summary: get pokemon
+      tags:
+      - Pokemon
+  /pokemon/catch:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Req Param
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/controller.catchReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: json with success = true
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.SuccessResponse'
+            - properties:
+                payload:
+                  $ref: '#/definitions/model.UserpokemonRes'
+              type: object
+        "400":
+          description: json with error = true
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+      summary: catch pokemon with success probability 50%
+      tags:
+      - Pokemon
+  /sign-in:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: json req body
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/controller.signinReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: json with success = true
+          schema:
+            $ref: '#/definitions/response.SuccessResponse'
+        "400":
+          description: json with error = true
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+      summary: Sign in a user
+      tags:
+      - Authentication
+  /sign-out:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: json with success = true
+          schema:
+            $ref: '#/definitions/response.SuccessResponse'
+        "400":
+          description: json with error = true
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+      summary: Sign out a user
+      tags:
+      - Authentication
+  /sign-up:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: json req body
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/controller.signupReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: json with success = true
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.SuccessResponse'
+            - properties:
+                payload:
+                  $ref: '#/definitions/model.UserRes'
+              type: object
+        "400":
+          description: json with error = true
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+      summary: Sign up a user
+      tags:
+      - Authentication
+  /user-pokemon/my-pokemon:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: json with success = true
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.SuccessResponse'
+            - properties:
+                payload:
+                  items:
+                    $ref: '#/definitions/model.UserpokemonRes'
+                  type: array
+              type: object
+        "400":
+          description: json with error = true
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+      summary: page user pokemon
+      tags:
+      - User Pokemon
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Req Param
+        in: body
+        name: req
+        required: true
+        schema:
+          $ref: '#/definitions/controller.updateUserpokemonReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: json with success = true
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.SuccessResponse'
+            - properties:
+                payload:
+                  $ref: '#/definitions/model.UserpokemonRes'
+              type: object
+        "400":
+          description: json with error = true
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+      summary: update user pokemon
+      tags:
+      - User Pokemon
+  /user/me:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: json with success = true
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.SuccessResponse'
+            - properties:
+                payload:
+                  $ref: '#/definitions/controller.meRes'
+              type: object
+        "400":
+          description: json with error = true
+          schema:
+            $ref: '#/definitions/response.ErrorResponse'
+      summary: To do get current login user
+      tags:
+      - User
+swagger: "2.0"

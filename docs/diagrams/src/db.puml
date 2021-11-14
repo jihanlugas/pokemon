@@ -1,0 +1,35 @@
+@startuml
+
+!define type(x) <color:green>""x""</color>
+
+entity "user" <<(P,LightGreen)>> {
+    + user_id: type(int8) [PK]
+    --
+    *fullname: type(varchar(80))
+    *email: type(varchar(200))
+    *no_hp:type(varchar(20))
+    *username: type(varchar(50))
+    *passwd: type(varchar(500))
+    *photo_id: type(int8)
+    *is_active: type(bool)
+    *create_by: type(int8)
+    *create_dt: type(timestampTz)
+    *update_by: type(int8)
+    *update_dt: type(timestampTz)
+    delete_by: type(int8)
+    delete_dt: type(timestampTz)
+}
+
+entity "userpokemon" <<(P,LightGreen)>> {
+    + userpokemon_id: type(int8) [PK]
+    --
+    *user_id: type(int8) [FK]
+    *pokemon: type(varchar(80)) [FK]
+    *nickname: type(varchar(80))
+    *create_by: type(int8)
+    *create_dt: type(timestampTz)
+    *update_by: type(int8)
+    *update_dt: type(timestampTz)
+}
+
+@enduml
