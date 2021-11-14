@@ -99,7 +99,7 @@ func (h Pokemon) Page(c echo.Context) error {
 // @Produce json
 // @in header
 // @name Authorization
-// @Param req query pageReq true "Req Param"
+// @Param pokemon path string true "Pokemon"
 // @Success 200 {object} response.SuccessResponse{payload=structs.Pokemon} "json with success = true"
 // @Failure 400 {object} response.ErrorResponse "json with error = true"
 // @Router /pokemon/{pokemon} [get]

@@ -313,12 +313,11 @@ paths:
       consumes:
       - application/json
       parameters:
-      - in: query
-        name: limit
-        type: integer
-      - in: query
-        name: offset
-        type: integer
+      - description: Pokemon
+        in: path
+        name: pokemon
+        required: true
+        type: string
       produces:
       - application/json
       responses:
@@ -492,7 +491,7 @@ paths:
           description: json with error = true
           schema:
             $ref: '#/definitions/response.ErrorResponse'
-      summary: update user pokemon
+      summary: update single data user pokemon
       tags:
       - User Pokemon
   /user/me:

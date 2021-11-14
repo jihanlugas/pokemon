@@ -60,7 +60,7 @@ func (h Userpokemon) MyPokemon(c echo.Context) error {
 }
 
 // @Tags User Pokemon
-// @Summary update user pokemon
+// @Summary update single data user pokemon
 // @Accept json
 // @Produce json
 // @in header

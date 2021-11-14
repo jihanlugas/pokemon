@@ -141,14 +141,11 @@ var doc = `{
                 "summary": "get pokemon",
                 "parameters": [
                     {
-                        "type": "integer",
-                        "name": "limit",
-                        "in": "query"
-                    },
-                    {
-                        "type": "integer",
-                        "name": "offset",
-                        "in": "query"
+                        "type": "string",
+                        "description": "Pokemon",
+                        "name": "pokemon",
+                        "in": "path",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -349,7 +346,7 @@ var doc = `{
                 "tags": [
                     "User Pokemon"
                 ],
-                "summary": "update user pokemon",
+                "summary": "update single data user pokemon",
                 "parameters": [
                     {
                         "description": "Req Param",
