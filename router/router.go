@@ -51,9 +51,9 @@ func Init() *echo.Echo {
 	userpokemonController := controller.UserpokemonComposer()
 
 
-	if config.Environment != config.PRODUCTION {
+	//if config.Environment != config.PRODUCTION {
 		web.GET("/swg/*", echoSwagger.WrapHandler)
-	}
+	//}
 
 	webPokemon := web.Group("/pokemon", checkToken)
 	webPokemon.GET("", pokemonController.Page)
